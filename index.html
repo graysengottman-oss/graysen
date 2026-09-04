@@ -3,2003 +3,1440 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Graysen</title>
-
+<title>Graysen | Portfolio</title>
 <style>
 *{
     box-sizing:border-box;
     margin:0;
     padding:0;
 }
-
-:root{
-    --bg:#f3eadb;
-    --card:#fffaf2;
-    --text:#111;
-    --muted:#625b52;
-    --green:#2f6b4f;
-    --green-dark:#214d38;
-    --border:#d8cdbd;
-    --danger:#963737;
+html{
+    scroll-behavior:smooth;
 }
-
 body{
-    font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Arial,sans-serif;
-    background:var(--bg);
-    color:var(--text);
-    min-height:100vh;
+    font-family:Arial,Helvetica,sans-serif;
+    background:#f3eee4;
+    color:#111;
+    line-height:1.6;
 }
-
+button,
+input,
+textarea{
+    font:inherit;
+}
+button{
+    cursor:pointer;
+}
 header{
     position:sticky;
     top:0;
-    z-index:50;
-    background:rgba(243,234,219,.95);
-    backdrop-filter:blur(14px);
-    border-bottom:1px solid var(--border);
+    z-index:1000;
+    background:rgba(243,238,228,.94);
+    backdrop-filter:blur(12px);
+    border-bottom:1px solid #d8d0c2;
 }
-
 .nav{
-    max-width:1100px;
+    max-width:1150px;
     margin:auto;
-    padding:17px 20px;
+    padding:18px 24px;
     display:flex;
-    justify-content:space-between;
     align-items:center;
-    gap:15px;
+    justify-content:space-between;
+    gap:20px;
 }
-
 .logo{
-    font-size:29px;
+    font-size:25px;
     font-weight:700;
-    letter-spacing:-1.2px;
+    letter-spacing:-1px;
 }
-
 nav{
     display:flex;
+    gap:8px;
     flex-wrap:wrap;
-    gap:5px;
 }
-
 nav button{
     border:0;
     background:transparent;
-    color:var(--text);
-    padding:9px 11px;
-    border-radius:10px;
-    cursor:pointer;
-    font:inherit;
+    padding:9px 13px;
+    border-radius:8px;
+    color:#111;
 }
-
 nav button:hover,
 nav button.active{
-    background:#dfd2bf;
+    background:#dfe7dc;
 }
-
-main{
-    max-width:1100px;
+.container{
+    max-width:1150px;
     margin:auto;
-    padding:40px 20px 80px;
+    padding:50px 24px 80px;
 }
-
 .page{
     display:none;
-    animation:appear .35s ease;
+    animation:fade .3s ease;
 }
-
 .page.active{
     display:block;
 }
-
-@keyframes appear{
+@keyframes fade{
     from{
         opacity:0;
-        transform:translateY(10px);
+        transform:translateY(8px);
     }
     to{
         opacity:1;
         transform:translateY(0);
     }
 }
-
 .hero{
-    min-height:68vh;
+    min-height:65vh;
     display:grid;
-    grid-template-columns:270px 1fr;
+    grid-template-columns:1fr 330px;
     align-items:center;
-    gap:50px;
+    gap:60px;
 }
-
+.hero h1{
+    font-size:clamp(55px,9vw,105px);
+    line-height:.9;
+    letter-spacing:-6px;
+    margin-bottom:25px;
+}
+.hero p{
+    max-width:650px;
+    font-size:19px;
+    color:#555;
+}
 .profile{
-    width:270px;
-    height:270px;
-    border-radius:50%;
+    width:100%;
+    aspect-ratio:1;
+    border-radius:20px;
     object-fit:cover;
-    background:#ddd2c2;
-    border:6px solid var(--card);
-    box-shadow:0 12px 40px rgba(0,0,0,.12);
+    background:#ddd5c8;
 }
-
-.profile-placeholder{
-    width:270px;
-    height:270px;
-    border-radius:50%;
-    background:#ded2c1;
+.no-profile{
+    width:100%;
+    aspect-ratio:1;
+    border-radius:20px;
+    background:#ded7ca;
     display:flex;
     align-items:center;
     justify-content:center;
-    color:var(--green);
-    font-size:80px;
-    font-weight:700;
-    border:6px solid var(--card);
+    color:#777;
+    text-align:center;
+    padding:30px;
 }
-
-.kicker{
-    color:var(--green);
-    font-weight:700;
-    letter-spacing:2px;
-    font-size:13px;
-    margin-bottom:12px;
+.section-title{
+    margin-bottom:35px;
 }
-
-h1{
-    font-size:clamp(55px,8vw,90px);
-    line-height:.92;
-    letter-spacing:-5px;
-    margin-bottom:22px;
-}
-
-h2{
-    font-size:43px;
+.section-title h2{
+    font-size:45px;
     letter-spacing:-2px;
-    margin-bottom:10px;
 }
-
-h3{
-    margin-bottom:8px;
+.section-title p{
+    color:#666;
+    margin-top:5px;
 }
-
-.bio{
-    max-width:680px;
-    color:var(--muted);
-    font-size:19px;
-    line-height:1.7;
-    margin-bottom:25px;
-}
-
-.btn{
-    border:0;
-    background:var(--green);
-    color:white;
-    padding:12px 18px;
-    border-radius:11px;
-    cursor:pointer;
-    font-weight:650;
-    font-size:15px;
-}
-
-.btn:hover{
-    background:var(--green-dark);
-}
-
-.secondary{
-    background:#dfd2bf;
-    color:var(--text);
-}
-
-.section-head{
-    margin-bottom:30px;
-}
-
-.section-head p{
-    color:var(--muted);
-    line-height:1.6;
-}
-
 .gallery{
     display:grid;
     grid-template-columns:repeat(3,1fr);
     gap:18px;
 }
-
-.photo{
-    background:var(--card);
-    border:1px solid var(--border);
-    border-radius:17px;
+.photo-card{
+    background:#fff;
+    border-radius:14px;
     overflow:hidden;
-    box-shadow:0 5px 20px rgba(0,0,0,.05);
+    box-shadow:0 4px 18px rgba(0,0,0,.06);
 }
-
-.photo img{
-    display:block;
+.photo-card img{
     width:100%;
-    aspect-ratio:1/1;
+    aspect-ratio:1;
     object-fit:cover;
+    display:block;
     cursor:pointer;
 }
-
 .caption{
-    padding:13px 15px 16px;
-    color:var(--muted);
-    line-height:1.5;
+    padding:13px 15px;
+    color:#444;
 }
-
+.empty{
+    padding:50px 20px;
+    border:1px dashed #aaa;
+    border-radius:15px;
+    text-align:center;
+    color:#777;
+}
 .cards{
     display:grid;
     grid-template-columns:repeat(2,1fr);
-    gap:18px;
+    gap:20px;
 }
-
 .card{
-    background:var(--card);
-    border:1px solid var(--border);
-    border-radius:17px;
-    padding:23px;
+    background:#fff;
+    padding:25px;
+    border-radius:15px;
+    box-shadow:0 4px 18px rgba(0,0,0,.05);
 }
-
+.card h3{
+    font-size:24px;
+    margin-bottom:8px;
+}
 .card p{
-    color:var(--muted);
-    line-height:1.65;
-    margin:8px 0 16px;
+    color:#666;
+    margin-bottom:18px;
 }
-
-.card a{
-    color:var(--green);
+.link{
+    color:#315c38;
+    font-weight:700;
     text-decoration:none;
-    font-weight:650;
 }
-
-.empty{
-    border:1px dashed var(--border);
-    border-radius:17px;
-    padding:40px 20px;
-    text-align:center;
-    color:var(--muted);
+.button{
+    border:0;
+    background:#315c38;
+    color:white;
+    padding:12px 18px;
+    border-radius:9px;
+    font-weight:700;
 }
-
-.overlay{
+.button:hover{
+    opacity:.9;
+}
+.outline{
+    background:transparent;
+    color:#315c38;
+    border:1px solid #315c38;
+}
+.editor-button{
+    position:fixed;
+    right:20px;
+    bottom:20px;
+    z-index:2000;
+    border:0;
+    border-radius:50px;
+    padding:14px 20px;
+    background:#111;
+    color:#fff;
+    box-shadow:0 8px 30px rgba(0,0,0,.2);
+}
+.modal{
     position:fixed;
     inset:0;
-    z-index:100;
+    z-index:3000;
+    background:rgba(0,0,0,.6);
     display:none;
     align-items:center;
     justify-content:center;
-    padding:18px;
-    background:rgba(0,0,0,.78);
+    padding:20px;
 }
-
-.overlay.show{
+.modal.show{
     display:flex;
 }
-
-.modal{
-    width:min(720px,100%);
-    max-height:92vh;
+.modal-box{
+    width:min(800px,100%);
+    max-height:90vh;
     overflow:auto;
-    background:var(--card);
-    border-radius:20px;
+    background:#f8f5ef;
+    border-radius:18px;
     padding:25px;
 }
-
-.modal h2{
-    font-size:32px;
+.modal-header{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    margin-bottom:25px;
 }
-
-.modal p{
-    color:var(--muted);
-    line-height:1.55;
+.close{
+    border:0;
+    background:transparent;
+    font-size:28px;
 }
-
-label{
+.field{
+    margin-bottom:20px;
+}
+.field label{
     display:block;
-    font-weight:650;
-    margin-top:15px;
+    font-weight:700;
+    margin-bottom:7px;
 }
-
-input,
-textarea{
+.field input,
+.field textarea{
     width:100%;
-    border:1px solid var(--border);
-    border-radius:10px;
+    border:1px solid #ccc3b5;
+    border-radius:9px;
     padding:12px;
-    margin-top:7px;
-    background:white;
-    color:#111;
-    font:inherit;
+    background:#fff;
 }
-
-textarea{
-    min-height:100px;
+.field textarea{
+    min-height:110px;
     resize:vertical;
 }
-
-.form-section{
-    border-top:1px solid var(--border);
-    margin-top:23px;
-    padding-top:20px;
+.editor-section{
+    border-top:1px solid #d8d0c2;
+    margin-top:25px;
+    padding-top:25px;
 }
-
-.form-section h3{
-    margin-bottom:10px;
-}
-
-.small{
-    font-size:13px;
-}
-
 .editor-photo{
     display:grid;
-    grid-template-columns:65px 1fr auto;
+    grid-template-columns:90px 1fr auto;
+    gap:12px;
     align-items:center;
-    gap:10px;
+    background:#fff;
     padding:10px;
-    margin-top:10px;
-    border:1px solid var(--border);
-    border-radius:12px;
+    border-radius:10px;
+    margin-bottom:10px;
 }
-
 .editor-photo img{
-    width:65px;
-    height:65px;
+    width:90px;
+    height:70px;
     object-fit:cover;
-    border-radius:8px;
+    border-radius:7px;
 }
-
-.editor-photo input{
-    margin:0;
-}
-
-.danger{
+.remove{
     border:0;
-    background:var(--danger);
-    color:white;
-    padding:9px 11px;
-    border-radius:8px;
-    cursor:pointer;
+    background:#b53a32;
+    color:#fff;
+    padding:8px 10px;
+    border-radius:7px;
 }
-
+.actions{
+    display:flex;
+    gap:10px;
+    flex-wrap:wrap;
+    margin-top:25px;
+}
 .status{
-    display:none;
     margin-top:15px;
     padding:12px;
-    border-radius:10px;
-    background:#e6dccd;
-    color:#2d2924;
+    border-radius:8px;
+    display:none;
 }
-
 .status.show{
     display:block;
 }
-
+.lightbox{
+    position:fixed;
+    inset:0;
+    background:rgba(0,0,0,.9);
+    z-index:4000;
+    display:none;
+    align-items:center;
+    justify-content:center;
+    padding:25px;
+}
+.lightbox.show{
+    display:flex;
+}
 .lightbox img{
-    max-width:95vw;
-    max-height:90vh;
-    border-radius:15px;
+    max-width:95%;
+    max-height:90%;
+    object-fit:contain;
 }
-
-footer{
-    text-align:center;
-    padding:30px;
-    color:var(--muted);
+.lightbox button{
+    position:absolute;
+    top:20px;
+    right:25px;
+    background:transparent;
+    border:0;
+    color:#fff;
+    font-size:35px;
 }
-
-@media(max-width:760px){
-
+@media(max-width:750px){
     .nav{
-        flex-direction:column;
         align-items:flex-start;
+        flex-direction:column;
     }
-
     nav{
         width:100%;
+        overflow-x:auto;
     }
-
     .hero{
         grid-template-columns:1fr;
-        text-align:center;
-        justify-items:center;
-        min-height:auto;
-        padding:35px 0;
+        gap:35px;
     }
-
+    .hero h1{
+        font-size:65px;
+    }
     .profile,
-    .profile-placeholder{
-        width:210px;
-        height:210px;
+    .no-profile{
+        max-width:330px;
     }
-
-    h1{
-        font-size:60px;
-    }
-
-    .bio{
-        font-size:17px;
-    }
-
     .gallery{
         grid-template-columns:repeat(2,1fr);
     }
-
     .cards{
         grid-template-columns:1fr;
     }
 }
-
-@media(max-width:450px){
-
+@media(max-width:500px){
+    .container{
+        padding:35px 16px 70px;
+    }
     .gallery{
         grid-template-columns:1fr;
-    }
-
-    h1{
-        font-size:52px;
-    }
-
-    .modal{
-        padding:19px;
     }
 }
 </style>
 </head>
-
 <body>
-
 <header>
-<div class="nav">
-
-    <div class="logo">Graysen</div>
-
-    <nav>
-        <button class="active" onclick="showPage('home',this)">Home</button>
-        <button onclick="showPage('photography',this)">Photography</button>
-        <button onclick="showPage('research',this)">Political Research</button>
-        <button onclick="showPage('newspaper',this)">Newspaper</button>
-        <button onclick="openLogin()">Edit Portfolio</button>
-    </nav>
-
-</div>
+    <div class="nav">
+        <div class="logo" id="logo">Graysen</div>
+        <nav>
+            <button onclick="showPage('home')" id="nav-home">Home</button>
+            <button onclick="showPage('photography')" id="nav-photography">Photography</button>
+            <button onclick="showPage('research')" id="nav-research">Political Research</button>
+            <button onclick="showPage('newspaper')" id="nav-newspaper">Newspaper</button>
+        </nav>
+    </div>
 </header>
-
-<main>
-
-<section id="home" class="page active">
-
-    <div class="hero">
-
-        <div id="profileArea"></div>
-
-        <div>
-            <div class="kicker">PORTFOLIO</div>
-
-            <h1 id="name">Graysen</h1>
-
-            <p id="bio" class="bio">
-                Welcome to my portfolio.
+<main class="container">
+    <!-- HOME -->
+    <section id="home" class="page active">
+        <div class="hero">
+            <div>
+                <h1 id="homeName">Graysen</h1>
+                <p id="homeBio"></p>
+            </div>
+            <div id="profileContainer"></div>
+        </div>
+    </section>
+    <!-- PHOTOGRAPHY -->
+    <section id="photography" class="page">
+        <div class="section-title">
+            <h2>Photography</h2>
+            <p>A collection of my photography.</p>
+        </div>
+        <div id="gallery" class="gallery"></div>
+    </section>
+    <!-- RESEARCH -->
+    <section id="research" class="page">
+        <div class="section-title">
+            <h2>Political Research</h2>
+            <p>Research, writing, and projects.</p>
+        </div>
+        <div id="researchCards" class="cards"></div>
+    </section>
+    <!-- NEWSPAPER -->
+    <section id="newspaper" class="page">
+        <div class="section-title">
+            <h2 id="newspaperTitle">Newspaper</h2>
+            <p id="newspaperDescription"></p>
+        </div>
+        <div id="newspaperLink"></div>
+    </section>
+</main>
+<button class="editor-button" onclick="openEditor()">
+    Edit Portfolio
+</button>
+<!-- PASSWORD MODAL -->
+<div class="modal" id="passwordModal">
+    <div class="modal-box">
+        <div class="modal-header">
+            <h2>Editor Access</h2>
+            <button class="close" onclick="closeModal('passwordModal')">×</button>
+        </div>
+        <div class="field">
+            <label>Editor Code</label>
+            <input id="editorCodeInput" type="password" placeholder="Enter code">
+        </div>
+        <div class="actions">
+            <button class="button" onclick="checkCode()">Continue</button>
+        </div>
+        <div id="passwordStatus" class="status"></div>
+    </div>
+</div>
+<!-- EDITOR -->
+<div class="modal" id="editorModal">
+    <div class="modal-box">
+        <div class="modal-header">
+            <h2>Edit Portfolio</h2>
+            <button class="close" onclick="closeModal('editorModal')">×</button>
+        </div>
+        <div class="field">
+            <label>Name</label>
+            <input id="editName">
+        </div>
+        <div class="field">
+            <label>Bio</label>
+            <textarea id="editBio"></textarea>
+        </div>
+        <div class="field">
+            <label>Profile Photo</label>
+            <input type="file" id="profileUpload" accept="image/*">
+        </div>
+        <div class="editor-section">
+            <h3>Photography</h3>
+            <p style="color:#666;margin:5px 0 15px;">
+                Maximum 25 photos. Photos are automatically compressed.
             </p>
-
-            <button class="btn" onclick="showPageById('photography')">
-                Explore my work
+            <input
+                type="file"
+                id="photoUpload"
+                accept="image/*"
+                multiple
+            >
+            <div id="editorPhotos" style="margin-top:15px;"></div>
+        </div>
+        <div class="editor-section">
+            <h3>Political Research</h3>
+            <div id="editorResearch"></div>
+            <button class="button outline" onclick="addResearch()">
+                + Add Research
             </button>
         </div>
-
-    </div>
-
-</section>
-
-<section id="photography" class="page">
-
-    <div class="section-head">
-        <div class="kicker">MY WORK</div>
-        <h2>Photography</h2>
-        <p>Photography, moments, and places I've captured.</p>
-    </div>
-
-    <div id="gallery" class="gallery"></div>
-
-</section>
-
-<section id="research" class="page">
-
-    <div class="section-head">
-        <div class="kicker">MY RESEARCH</div>
-        <h2>Political Research</h2>
-        <p>Research, ideas, and political projects.</p>
-    </div>
-
-    <div id="researchList" class="cards"></div>
-
-</section>
-
-<section id="newspaper" class="page">
-
-    <div class="section-head">
-        <div class="kicker">JOURNALISM</div>
-        <h2 id="newspaperTitle">Newspaper</h2>
-        <p id="newspaperDescription"></p>
-    </div>
-
-    <div id="newspaperContent"></div>
-
-</section>
-
-</main>
-
-<footer>
-© <span id="year"></span> Graysen
-</footer>
-
-
-<!-- LOGIN -->
-
-<div class="overlay" id="loginOverlay">
-
-<div class="modal">
-
-    <h2>Edit Portfolio</h2>
-
-    <p>Enter your editor code.</p>
-
-    <input
-        id="editorCode"
-        type="password"
-        placeholder="Editor code"
-    >
-
-    <br><br>
-
-    <button class="btn" onclick="checkEditorCode()">
-        Continue
-    </button>
-
-    <button
-        class="btn secondary"
-        onclick="closeAllOverlays()"
-    >
-        Cancel
-    </button>
-
-    <p
-        id="loginError"
-        style="color:#963737;margin-top:12px"
-    ></p>
-
-</div>
-
-</div>
-
-
-<!-- EDITOR -->
-
-<div class="overlay" id="editorOverlay">
-
-<div class="modal">
-
-    <h2>Edit Portfolio</h2>
-
-    <label>Name</label>
-
-    <input id="editName">
-
-
-    <label>Bio</label>
-
-    <textarea id="editBio"></textarea>
-
-
-    <div class="form-section">
-
-        <h3>Profile Picture</h3>
-
-        <input
-            id="profileUpload"
-            type="file"
-            accept="image/*"
-        >
-
-        <p class="small">
-            Images are automatically compressed before uploading.
-        </p>
-
-    </div>
-
-
-    <div class="form-section">
-
-        <h3>Photography</h3>
-
-        <input
-            id="photoUpload"
-            type="file"
-            accept="image/*"
-            multiple
-        >
-
-        <p class="small">
-            Maximum 25 photos.
-        </p>
-
-        <div id="photoEditor"></div>
-
-    </div>
-
-
-    <div class="form-section">
-
-        <h3>Political Research</h3>
-
-        <div id="researchEditor"></div>
-
-        <button class="btn" onclick="addResearch()">
-            + Add Research
-        </button>
-
-    </div>
-
-
-    <div class="form-section">
-
-        <h3>Newspaper</h3>
-
-        <label>Title</label>
-
-        <input id="editNewsTitle">
-
-
-        <label>Description</label>
-
-        <textarea id="editNewsDescription"></textarea>
-
-
-        <label>Link</label>
-
-        <input
-            id="editNewsLink"
-            placeholder="https://..."
-        >
-
-    </div>
-
-
-    <div class="form-section">
-
-        <h3>Publish to GitHub</h3>
-
-        <p class="small">
-            Paste your GitHub fine-grained token below.
-            Do not share this token with anyone.
-        </p>
-
-        <input
-            id="githubToken"
-            type="password"
-            placeholder="github_pat_..."
-        >
-
-        <br><br>
-
-        <button
-            class="btn"
-            onclick="publishPortfolio()"
-        >
-            Save & Publish
-        </button>
-
-        <button
-            class="btn secondary"
-            onclick="closeAllOverlays()"
-        >
-            Cancel
-        </button>
-
+        <div class="editor-section">
+            <h3>Newspaper</h3>
+            <div class="field">
+                <label>Title</label>
+                <input id="editNewspaperTitle">
+            </div>
+            <div class="field">
+                <label>Description</label>
+                <textarea id="editNewspaperDescription"></textarea>
+            </div>
+            <div class="field">
+                <label>Link</label>
+                <input id="editNewspaperLink" placeholder="https://...">
+            </div>
+        </div>
+        <div class="actions">
+            <button class="button" onclick="publishPortfolio()">
+                Save & Publish
+            </button>
+            <button class="button outline" onclick="closeModal('editorModal')">
+                Cancel
+            </button>
+        </div>
         <div id="publishStatus" class="status"></div>
-
     </div>
-
 </div>
-
-</div>
-
-
 <!-- LIGHTBOX -->
-
-<div
-    class="overlay lightbox"
-    id="lightbox"
-    onclick="closeLightbox()"
->
+<div class="lightbox" id="lightbox">
+    <button onclick="closeLightbox()">×</button>
     <img id="lightboxImage">
 </div>
-
-
 <script>
-
 /* =========================================================
-   PORTFOLIO DATA SECTION
-   ========================================================= */
-
-const PORTFOLIO_DATA = {
-
+   SETTINGS
+========================================================= */
+const GITHUB_OWNER = "graysengottman-oss";
+const GITHUB_REPOSITORY = "graysen";
+const GITHUB_BRANCH = "main";
+const DATA_FILE = "portfolio-data.json";
+const EDITOR_CODE = "4547";
+const MAX_PHOTOS = 25;
+/* =========================================================
+   DEFAULT DATA
+========================================================= */
+let portfolio = {
     name: "Graysen",
-
     bio: "Welcome to my portfolio. This is where I share my photography, political research, and newspaper work.",
-
     profileImage: "",
-
     photos: [],
-
     research: [],
-
     newspaper: {
         title: "Newspaper",
         description: "Articles, projects, and work from the newspaper.",
         link: ""
     }
 };
-
-
 /* =========================================================
-   GITHUB SETTINGS
-   ========================================================= */
-
-const GITHUB_OWNER = "graysengottman-oss";
-const GITHUB_REPOSITORY = "graysen";
-const GITHUB_BRANCH = "main";
-
-const DATA_FILE = "portfolio-data.json";
-
-const EDITOR_CODE = "4547";
-
-
-/* =========================================================
-   CURRENT DATA
-   ========================================================= */
-
-let portfolio = JSON.parse(
-    JSON.stringify(PORTFOLIO_DATA)
-);
-
-let newPhotos = [];
-
-
-/* =========================================================
-   START
-   ========================================================= */
-
-document.getElementById("year").textContent =
-    new Date().getFullYear();
-
-loadPortfolio();
-
-
-/* =========================================================
-   LOAD PORTFOLIO
-   ========================================================= */
-
+   LOAD DATA
+========================================================= */
 async function loadPortfolio(){
-
     try{
-
         const response = await fetch(
             DATA_FILE + "?v=" + Date.now()
         );
-
         if(response.ok){
-
-            const remoteData =
-                await response.json();
-
+            const data = await response.json();
             portfolio = {
                 ...portfolio,
-                ...remoteData
+                ...data,
+                newspaper:{
+                    ...portfolio.newspaper,
+                    ...(data.newspaper || {})
+                }
             };
         }
-
     }catch(error){
-
-        console.log(
-            "Using default portfolio data."
-        );
+        console.log("Using default portfolio data.");
     }
-
     renderPortfolio();
 }
-
-
 /* =========================================================
    RENDER
-   ========================================================= */
-
+========================================================= */
 function renderPortfolio(){
-
-    document.getElementById("name").textContent =
+    document.getElementById("logo").textContent =
         portfolio.name || "Graysen";
-
-    document.getElementById("bio").textContent =
+    document.getElementById("homeName").textContent =
+        portfolio.name || "Graysen";
+    document.getElementById("homeBio").textContent =
         portfolio.bio || "";
-
-
-    /* PROFILE */
-
-    const profileArea =
-        document.getElementById("profileArea");
-
+    const profileContainer =
+        document.getElementById("profileContainer");
     if(portfolio.profileImage){
-
-        profileArea.innerHTML = `
+        profileContainer.innerHTML = `
             <img
                 class="profile"
-                src="${safe(portfolio.profileImage)}"
-                alt="Graysen"
+                src="${escapeAttribute(portfolio.profileImage)}"
+                alt="Profile photo"
             >
         `;
-
     }else{
-
-        profileArea.innerHTML = `
-            <div class="profile-placeholder">
-                G
+        profileContainer.innerHTML = `
+            <div class="no-profile">
+                Add a profile photo from Edit Portfolio.
             </div>
         `;
     }
-
-
-    /* PHOTOS */
-
-    renderGallery();
-
-
-    /* RESEARCH */
-
+    renderPhotos();
     renderResearch();
-
-
-    /* NEWSPAPER */
-
-    const newspaper =
-        portfolio.newspaper || {};
-
-    document.getElementById(
-        "newspaperTitle"
-    ).textContent =
-        newspaper.title || "Newspaper";
-
-    document.getElementById(
-        "newspaperDescription"
-    ).textContent =
-        newspaper.description || "";
-
-
-    const news =
-        document.getElementById(
-            "newspaperContent"
-        );
-
-    if(newspaper.link){
-
-        news.innerHTML = `
-            <a
-                class="btn"
-                href="${safe(newspaper.link)}"
-                target="_blank"
-                rel="noopener"
-            >
-                Read Newspaper
-            </a>
-        `;
-
-    }else{
-
-        news.innerHTML = `
-            <div class="empty">
-                No newspaper link added yet.
-            </div>
-        `;
-    }
+    renderNewspaper();
 }
-
-
 /* =========================================================
-   PHOTOGRAPHY
-   ========================================================= */
-
-function renderGallery(){
-
-    const gallery =
-        document.getElementById("gallery");
-
-    const photos =
-        portfolio.photos || [];
-
-    if(!photos.length){
-
-        gallery.innerHTML = `
-            <div class="empty">
-                No photography added yet.
-            </div>
-        `;
-
-        return;
+   PAGES
+========================================================= */
+function showPage(page){
+    document.querySelectorAll(".page").forEach(section => {
+        section.classList.remove("active");
+    });
+    document.getElementById(page).classList.add("active");
+    document.querySelectorAll("nav button").forEach(button => {
+        button.classList.remove("active");
+    });
+    const navButton =
+        document.getElementById("nav-" + page);
+    if(navButton){
+        navButton.classList.add("active");
     }
-
-    gallery.innerHTML =
-        photos.map((photo,index)=>{
-
-            return `
-                <div class="photo">
-
-                    <img
-                        src="${safe(photo.image)}"
-                        alt="Photography ${index + 1}"
-                        onclick="openLightbox('${safe(photo.image)}')"
-                    >
-
-                    ${
-                        photo.caption
-                        ?
-                        `<div class="caption">
-                            ${escapeText(photo.caption)}
-                        </div>`
-                        :
-                        ""
-                    }
-
-                </div>
-            `;
-
-        }).join("");
-}
-
-
-/* =========================================================
-   RESEARCH
-   ========================================================= */
-
-function renderResearch(){
-
-    const container =
-        document.getElementById(
-            "researchList"
-        );
-
-    const research =
-        portfolio.research || [];
-
-    if(!research.length){
-
-        container.innerHTML = `
-            <div class="empty">
-                No political research added yet.
-            </div>
-        `;
-
-        return;
-    }
-
-    container.innerHTML =
-        research.map(item=>{
-
-            return `
-                <div class="card">
-
-                    <h3>
-                        ${escapeText(item.title || "Untitled")}
-                    </h3>
-
-                    <p>
-                        ${escapeText(item.description || "")}
-                    </p>
-
-                    ${
-                        item.link
-                        ?
-                        `<a
-                            href="${safe(item.link)}"
-                            target="_blank"
-                            rel="noopener"
-                        >
-                            View Research →
-                        </a>`
-                        :
-                        ""
-                    }
-
-                </div>
-            `;
-
-        }).join("");
-}
-
-
-/* =========================================================
-   PAGE NAVIGATION
-   ========================================================= */
-
-function showPage(id,button){
-
-    document
-        .querySelectorAll(".page")
-        .forEach(page=>{
-            page.classList.remove("active");
-        });
-
-    const target =
-        document.getElementById(id);
-
-    if(target){
-        target.classList.add("active");
-    }
-
-    document
-        .querySelectorAll("nav button")
-        .forEach(btn=>{
-            btn.classList.remove("active");
-        });
-
-    if(button){
-        button.classList.add("active");
-    }
-
     window.scrollTo({
         top:0,
         behavior:"smooth"
     });
 }
-
-
-function showPageById(id){
-
-    showPage(id);
-
-    document
-        .querySelectorAll("nav button")
-        .forEach(btn=>{
-            btn.classList.remove("active");
-        });
-}
-
-
 /* =========================================================
-   EDITOR LOGIN
-   ========================================================= */
-
-function openLogin(){
-
-    document
-        .getElementById("loginOverlay")
-        .classList.add("show");
-
-    document.getElementById(
-        "editorCode"
-    ).value = "";
-
-    document.getElementById(
-        "loginError"
-    ).textContent = "";
-}
-
-
-function checkEditorCode(){
-
-    const code =
-        document.getElementById(
-            "editorCode"
-        ).value;
-
-    if(code !== EDITOR_CODE){
-
-        document.getElementById(
-            "loginError"
-        ).textContent =
-            "Incorrect code.";
-
+   PHOTOS
+========================================================= */
+function renderPhotos(){
+    const gallery =
+        document.getElementById("gallery");
+    gallery.innerHTML = "";
+    if(!portfolio.photos ||
+       portfolio.photos.length === 0){
+        gallery.innerHTML = `
+            <div class="empty">
+                No photos yet.
+            </div>
+        `;
         return;
     }
-
-    document
-        .getElementById("loginOverlay")
-        .classList.remove("show");
-
-    openEditor();
+    portfolio.photos.forEach((photo,index)=>{
+        const card =
+            document.createElement("div");
+        card.className = "photo-card";
+        card.innerHTML = `
+            <img
+                src="${escapeAttribute(photo.url)}"
+                alt="${escapeAttribute(photo.caption || "Photography")}"
+                onclick="openLightbox('${escapeAttribute(photo.url)}')"
+            >
+            ${
+                photo.caption
+                ?
+                `<div class="caption">
+                    ${escapeHTML(photo.caption)}
+                </div>`
+                :
+                ""
+            }
+        `;
+        gallery.appendChild(card);
+    });
 }
-
-
 /* =========================================================
-   EDITOR
-   ========================================================= */
-
-function openEditor(){
-
-    document
-        .getElementById("editorOverlay")
-        .classList.add("show");
-
-
-    document.getElementById(
-        "editName"
-    ).value =
-        portfolio.name || "";
-
-
-    document.getElementById(
-        "editBio"
-    ).value =
-        portfolio.bio || "";
-
-
+   RESEARCH
+========================================================= */
+function renderResearch(){
+    const container =
+        document.getElementById("researchCards");
+    container.innerHTML = "";
+    if(!portfolio.research ||
+       portfolio.research.length === 0){
+        container.innerHTML = `
+            <div class="empty">
+                No research projects yet.
+            </div>
+        `;
+        return;
+    }
+    portfolio.research.forEach(item=>{
+        const card =
+            document.createElement("div");
+        card.className = "card";
+        card.innerHTML = `
+            <h3>
+                ${escapeHTML(item.title || "Untitled")}
+            </h3>
+            <p>
+                ${escapeHTML(item.description || "")}
+            </p>
+            ${
+                item.link
+                ?
+                `<a
+                    class="link"
+                    href="${escapeAttribute(item.link)}"
+                    target="_blank"
+                    rel="noopener"
+                >
+                    View Research →
+                </a>`
+                :
+                ""
+            }
+        `;
+        container.appendChild(card);
+    });
+}
+/* =========================================================
+   NEWSPAPER
+========================================================= */
+function renderNewspaper(){
     const newspaper =
         portfolio.newspaper || {};
-
     document.getElementById(
-        "editNewsTitle"
-    ).value =
-        newspaper.title || "";
-
-
+        "newspaperTitle"
+    ).textContent =
+        newspaper.title || "Newspaper";
     document.getElementById(
-        "editNewsDescription"
-    ).value =
+        "newspaperDescription"
+    ).textContent =
         newspaper.description || "";
-
-
-    document.getElementById(
-        "editNewsLink"
-    ).value =
-        newspaper.link || "";
-
-
-    document.getElementById(
-        "profileUpload"
-    ).value = "";
-
-
-    document.getElementById(
-        "photoUpload"
-    ).value = "";
-
-
-    document.getElementById(
-        "githubToken"
-    ).value = "";
-
-
-    newPhotos = [];
-
-
-    renderPhotoEditor();
-    renderResearchEditor();
+    const linkContainer =
+        document.getElementById("newspaperLink");
+    if(newspaper.link){
+        linkContainer.innerHTML = `
+            <a
+                class="button"
+                href="${escapeAttribute(newspaper.link)}"
+                target="_blank"
+                rel="noopener"
+            >
+                Read Newspaper →
+            </a>
+        `;
+    }else{
+        linkContainer.innerHTML = "";
+    }
 }
-
-
-function renderPhotoEditor(){
-
-    const container =
-        document.getElementById(
-            "photoEditor"
-        );
-
-    const existing =
-        (portfolio.photos || [])
-        .map((photo,index)=>{
-
-            return `
-                <div class="editor-photo">
-
-                    <img
-                        src="${safe(photo.image)}"
-                    >
-
-                    <input
-                        value="${escapeAttribute(photo.caption || "")}"
-                        placeholder="Caption"
-                        oninput="
-                            portfolio.photos[${index}].caption=this.value
-                        "
-                    >
-
-                    <button
-                        class="danger"
-                        onclick="
-                            portfolio.photos.splice(${index},1);
-                            renderPhotoEditor();
-                        "
-                    >
-                        Delete
-                    </button>
-
-                </div>
-            `;
-
-        }).join("");
-
-
-    const pending =
-        newPhotos.map((photo,index)=>{
-
-            return `
-                <div class="editor-photo">
-
-                    <img
-                        src="${photo.preview}"
-                    >
-
-                    <input
-                        placeholder="Caption"
-                        oninput="
-                            newPhotos[${index}].caption=this.value
-                        "
-                    >
-
-                    <button
-                        class="danger"
-                        onclick="
-                            newPhotos.splice(${index},1);
-                            renderPhotoEditor();
-                        "
-                    >
-                        Delete
-                    </button>
-
-                </div>
-            `;
-
-        }).join("");
-
-
-    container.innerHTML =
-        existing + pending;
-}
-
-
 /* =========================================================
-   PHOTO UPLOAD
-   ========================================================= */
-
-document
-    .getElementById("photoUpload")
-    .addEventListener("change",async function(){
-
-        const files =
-            Array.from(this.files);
-
-        const current =
-            (portfolio.photos || []).length;
-
-        if(
-            current +
-            newPhotos.length +
-            files.length > 25
-        ){
-
-            alert(
-                "You can have a maximum of 25 photos."
-            );
-
-            this.value = "";
-            return;
-        }
-
-
-        for(const file of files){
-
-            try{
-
-                const compressed =
-                    await compressImage(file);
-
-                newPhotos.push({
-
-                    file:compressed,
-
-                    caption:"",
-
-                    preview:
-                        URL.createObjectURL(
-                            compressed
-                        )
-                });
-
-            }catch(error){
-
-                alert(
-                    "A photo could not be compressed."
-                );
-            }
-        }
-
-        renderPhotoEditor();
-    });
-
-
+   EDITOR
+========================================================= */
+function openEditor(){
+    document.getElementById(
+        "editorCodeInput"
+    ).value = "";
+    document.getElementById(
+        "passwordStatus"
+    ).className = "status";
+    document.getElementById(
+        "passwordModal"
+    ).classList.add("show");
+}
+function checkCode(){
+    const code =
+        document.getElementById(
+            "editorCodeInput"
+        ).value;
+    if(code === EDITOR_CODE){
+        closeModal("passwordModal");
+        openEditorPanel();
+    }else{
+        showStatus(
+            "passwordStatus",
+            "Incorrect editor code.",
+            true
+        );
+    }
+}
+function openEditorPanel(){
+    document.getElementById("editName").value =
+        portfolio.name || "";
+    document.getElementById("editBio").value =
+        portfolio.bio || "";
+    document.getElementById(
+        "editNewspaperTitle"
+    ).value =
+        portfolio.newspaper?.title || "";
+    document.getElementById(
+        "editNewspaperDescription"
+    ).value =
+        portfolio.newspaper?.description || "";
+    document.getElementById(
+        "editNewspaperLink"
+    ).value =
+        portfolio.newspaper?.link || "";
+    renderEditorPhotos();
+    renderEditorResearch();
+    document.getElementById(
+        "editorModal"
+    ).classList.add("show");
+}
+function closeModal(id){
+    document.getElementById(id)
+        .classList.remove("show");
+}
 /* =========================================================
    PROFILE IMAGE
-   ========================================================= */
-
-document
-    .getElementById("profileUpload")
-    .addEventListener("change",function(){
-
-        /* The actual upload happens when
-           Save & Publish is pressed. */
-
-    });
-
-
+========================================================= */
+document.getElementById(
+    "profileUpload"
+).addEventListener(
+    "change",
+    async function(){
+        const file = this.files[0];
+        if(!file) return;
+        try{
+            showStatus(
+                "publishStatus",
+                "Compressing profile photo..."
+            );
+            const compressed =
+                await compressImage(file);
+            portfolio.profileImage =
+                await fileToDataURL(compressed);
+            renderEditorPhotos();
+            showStatus(
+                "publishStatus",
+                "Profile photo ready."
+            );
+        }catch(error){
+            showStatus(
+                "publishStatus",
+                error.message,
+                true
+            );
+        }
+    }
+);
 /* =========================================================
-   RESEARCH EDITOR
-   ========================================================= */
-
-function renderResearchEditor(){
-
+   PHOTO UPLOAD
+========================================================= */
+document.getElementById(
+    "photoUpload"
+).addEventListener(
+    "change",
+    async function(){
+        const files =
+            Array.from(this.files || []);
+        if(!files.length) return;
+        if(
+            portfolio.photos.length + files.length
+            > MAX_PHOTOS
+        ){
+            showStatus(
+                "publishStatus",
+                "You can have a maximum of 25 photos.",
+                true
+            );
+            return;
+        }
+        try{
+            showStatus(
+                "publishStatus",
+                "Compressing photos..."
+            );
+            for(const file of files){
+                const compressed =
+                    await compressImage(file);
+                const dataURL =
+                    await fileToDataURL(compressed);
+                portfolio.photos.push({
+                    url:dataURL,
+                    caption:""
+                });
+            }
+            renderEditorPhotos();
+            showStatus(
+                "publishStatus",
+                "Photos added."
+            );
+        }catch(error){
+            showStatus(
+                "publishStatus",
+                error.message,
+                true
+            );
+        }
+        this.value = "";
+    }
+);
+/* =========================================================
+   EDITOR PHOTOS
+========================================================= */
+function renderEditorPhotos(){
     const container =
         document.getElementById(
-            "researchEditor"
+            "editorPhotos"
         );
-
-    container.innerHTML =
-        (portfolio.research || [])
-        .map((item,index)=>{
-
-            return `
-                <div
-                    class="card"
-                    style="margin-bottom:12px"
+    container.innerHTML = "";
+    portfolio.photos.forEach(
+        (photo,index)=>{
+            const row =
+                document.createElement("div");
+            row.className =
+                "editor-photo";
+            row.innerHTML = `
+                <img
+                    src="${escapeAttribute(photo.url)}"
+                    alt=""
                 >
-
+                <input
+                    type="text"
+                    placeholder="Photo caption"
+                    value="${escapeAttribute(photo.caption || "")}"
+                    onchange="updateCaption(${index}, this.value)"
+                >
+                <button
+                    class="remove"
+                    onclick="removePhoto(${index})"
+                >
+                    Remove
+                </button>
+            `;
+            container.appendChild(row);
+        }
+    );
+}
+function updateCaption(index,value){
+    portfolio.photos[index].caption =
+        value;
+}
+function removePhoto(index){
+    portfolio.photos.splice(index,1);
+    renderEditorPhotos();
+}
+/* =========================================================
+   RESEARCH EDITOR
+========================================================= */
+function renderEditorResearch(){
+    const container =
+        document.getElementById(
+            "editorResearch"
+        );
+    container.innerHTML = "";
+    portfolio.research.forEach(
+        (item,index)=>{
+            const box =
+                document.createElement("div");
+            box.className = "card";
+            box.style.marginBottom = "15px";
+            box.innerHTML = `
+                <div class="field">
                     <label>Title</label>
-
                     <input
                         value="${escapeAttribute(item.title || "")}"
-                        oninput="
-                            portfolio.research[${index}].title=this.value
-                        "
+                        onchange="portfolio.research[${index}].title=this.value"
                     >
-
-
+                </div>
+                <div class="field">
                     <label>Description</label>
-
                     <textarea
-                        oninput="
-                            portfolio.research[${index}].description=this.value
-                        "
-                    >${escapeText(item.description || "")}</textarea>
-
-
+                        onchange="portfolio.research[${index}].description=this.value"
+                    >${escapeHTML(item.description || "")}</textarea>
+                </div>
+                <div class="field">
                     <label>Link</label>
-
                     <input
                         value="${escapeAttribute(item.link || "")}"
                         placeholder="https://..."
-                        oninput="
-                            portfolio.research[${index}].link=this.value
-                        "
+                        onchange="portfolio.research[${index}].link=this.value"
                     >
-
-
-                    <br><br>
-
-                    <button
-                        class="danger"
-                        onclick="
-                            portfolio.research.splice(${index},1);
-                            renderResearchEditor();
-                        "
-                    >
-                        Delete Research
-                    </button>
-
                 </div>
+                <button
+                    class="remove"
+                    onclick="removeResearch(${index})"
+                >
+                    Remove Research
+                </button>
             `;
-
-        }).join("");
+            container.appendChild(box);
+        }
+    );
 }
-
-
 function addResearch(){
-
-    if(!portfolio.research){
-        portfolio.research = [];
-    }
-
     portfolio.research.push({
-
         title:"",
-
         description:"",
-
         link:""
     });
-
-    renderResearchEditor();
+    renderEditorResearch();
 }
-
-
+function removeResearch(index){
+    portfolio.research.splice(index,1);
+    renderEditorResearch();
+}
+/* =========================================================
+   GITHUB PUBLISHING
+========================================================= */
+async function publishPortfolio(){
+    const status =
+        document.getElementById(
+            "publishStatus"
+        );
+    try{
+        portfolio.name =
+            document.getElementById(
+                "editName"
+            ).value.trim() || "Graysen";
+        portfolio.bio =
+            document.getElementById(
+                "editBio"
+            ).value.trim();
+        portfolio.newspaper = {
+            title:
+                document.getElementById(
+                    "editNewspaperTitle"
+                ).value.trim(),
+            description:
+                document.getElementById(
+                    "editNewspaperDescription"
+                ).value.trim(),
+            link:
+                document.getElementById(
+                    "editNewspaperLink"
+                ).value.trim()
+        };
+        const token =
+            prompt(
+                "Paste your GitHub Personal Access Token here.\n\nYour token is only used for this publish and is not saved by this website."
+            );
+        if(!token){
+            throw new Error(
+                "GitHub token was not entered."
+            );
+        }
+        showStatus(
+            "publishStatus",
+            "Publishing to GitHub..."
+        );
+        /*
+         * First upload profile image if it is a new
+         * data URL.
+         */
+        if(
+            portfolio.profileImage &&
+            portfolio.profileImage.startsWith("data:")
+        ){
+            showStatus(
+                "publishStatus",
+                "Uploading profile photo..."
+            );
+            const profileBlob =
+                dataURLToBlob(
+                    portfolio.profileImage
+                );
+            const profilePath =
+                "images/profile-" +
+                Date.now() +
+                ".jpg";
+            const profileURL =
+                await uploadBinaryFile(
+                    token,
+                    profilePath,
+                    profileBlob,
+                    "Update profile photo"
+                );
+            portfolio.profileImage =
+                profileURL;
+        }
+        /*
+         * Upload new photography.
+         */
+        for(
+            let i=0;
+            i<portfolio.photos.length;
+            i++
+        ){
+            const photo =
+                portfolio.photos[i];
+            if(
+                photo.url &&
+                photo.url.startsWith("data:")
+            ){
+                showStatus(
+                    "publishStatus",
+                    `Uploading photo ${i+1} of ${portfolio.photos.length}...`
+                );
+                const blob =
+                    dataURLToBlob(
+                        photo.url
+                    );
+                const path =
+                    "images/photo-" +
+                    Date.now() +
+                    "-" +
+                    i +
+                    ".jpg";
+                const publicURL =
+                    await uploadBinaryFile(
+                        token,
+                        path,
+                        blob,
+                        "Add photography"
+                    );
+                photo.url =
+                    publicURL;
+            }
+        }
+        showStatus(
+            "publishStatus",
+            "Updating portfolio data..."
+        );
+        await updateDataFile(
+            token,
+            portfolio
+        );
+        renderPortfolio();
+        showStatus(
+            "publishStatus",
+            "✓ Published successfully! GitHub Pages may take a few minutes to update."
+        );
+    }catch(error){
+        console.error(error);
+        showStatus(
+            "publishStatus",
+            "Error: " + error.message,
+            true
+        );
+    }
+}
+/* =========================================================
+   GITHUB API — DATA FILE
+========================================================= */
+async function updateDataFile(token,data){
+    const apiURL =
+        `https://api.github.com/repos/${GITHUB_OWNER}/${GITHUB_REPOSITORY}/contents/${DATA_FILE}`;
+    let sha = null;
+    const existing =
+        await fetch(
+            apiURL +
+            "?ref=" +
+            encodeURIComponent(GITHUB_BRANCH),
+            {
+                headers:{
+                    Authorization:"Bearer " + token,
+                    Accept:"application/vnd.github+json"
+                }
+            }
+        );
+    if(existing.ok){
+        const existingJSON =
+            await existing.json();
+        sha =
+            existingJSON.sha;
+    }else if(existing.status !== 404){
+        const text =
+            await existing.text();
+        throw new Error(
+            "Could not access portfolio-data.json: " +
+            text
+        );
+    }
+    const json =
+        JSON.stringify(
+            data,
+            null,
+            2
+        );
+    const body = {
+        message:
+            "Update portfolio data",
+        content:
+            utf8ToBase64(json),
+        branch:
+            GITHUB_BRANCH
+    };
+    if(sha){
+        body.sha = sha;
+    }
+    const response =
+        await fetch(
+            apiURL,
+            {
+                method:"PUT",
+                headers:{
+                    Authorization:"Bearer " + token,
+                    Accept:"application/vnd.github+json",
+                    "Content-Type":"application/json"
+                },
+                body:JSON.stringify(body)
+            }
+        );
+    if(!response.ok){
+        const errorText =
+            await response.text();
+        throw new Error(
+            "GitHub data update failed: " +
+            errorText
+        );
+    }
+}
+/* =========================================================
+   GITHUB API — IMAGE FILE
+========================================================= */
+async function uploadBinaryFile(
+    token,
+    path,
+    blob,
+    message
+){
+    const apiURL =
+        `https://api.github.com/repos/${GITHUB_OWNER}/${GITHUB_REPOSITORY}/contents/${path}`;
+    const buffer =
+        await blob.arrayBuffer();
+    const bytes =
+        new Uint8Array(buffer);
+    const base64 =
+        uint8ArrayToBase64(bytes);
+    const response =
+        await fetch(
+            apiURL,
+            {
+                method:"PUT",
+                headers:{
+                    Authorization:
+                        "Bearer " + token,
+                    Accept:
+                        "application/vnd.github+json",
+                    "Content-Type":
+                        "application/json"
+                },
+                body:JSON.stringify({
+                    message:message,
+                    content:base64,
+                    branch:GITHUB_BRANCH
+                })
+            }
+        );
+    if(!response.ok){
+        const text =
+            await response.text();
+        throw new Error(
+            "GitHub image upload failed: " +
+            text
+        );
+    }
+    const result =
+        await response.json();
+    /*
+     * GitHub Pages URL
+     */
+    return `https://${GITHUB_OWNER}.github.io/${GITHUB_REPOSITORY}/${path}`;
+}
 /* =========================================================
    IMAGE COMPRESSION
-   ========================================================= */
-
+========================================================= */
 async function compressImage(file){
-
     const bitmap =
         await createImageBitmap(file);
-
     const maxWidth = 1200;
-
-    let width = bitmap.width;
-    let height = bitmap.height;
-
-
+    let width =
+        bitmap.width;
+    let height =
+        bitmap.height;
     if(width > maxWidth){
-
         height =
             Math.round(
-                height * maxWidth / width
+                height *
+                (maxWidth / width)
             );
-
-        width = maxWidth;
+        width =
+            maxWidth;
     }
-
-
     const canvas =
         document.createElement("canvas");
-
-    canvas.width = width;
-    canvas.height = height;
-
-
-    const context =
+    canvas.width =
+        width;
+    canvas.height =
+        height;
+    const ctx =
         canvas.getContext("2d");
-
-    context.drawImage(
+    ctx.drawImage(
         bitmap,
         0,
         0,
         width,
         height
     );
-
-
     let quality = .75;
-
     let blob =
         await canvasToBlob(
             canvas,
             quality
         );
-
-
+    /*
+     * Keep reducing quality until the image
+     * is approximately 800 KB or smaller.
+     */
     while(
         blob.size > 800000 &&
         quality > .35
     ){
-
         quality -= .08;
-
         blob =
             await canvasToBlob(
                 canvas,
                 quality
             );
     }
-
-
-    if(blob.size > 900000){
-
+    if(blob.size > 1000000){
         throw new Error(
-            "Photo is still too large."
+            "This photo is still too large after compression. Try a smaller photo."
         );
     }
-
-
     return blob;
 }
-
-
 function canvasToBlob(canvas,quality){
-
-    return new Promise(resolve=>{
-
-        canvas.toBlob(
-            resolve,
-            "image/jpeg",
-            quality
-        );
-
-    });
-}
-
-
-/* =========================================================
-   GITHUB FUNCTIONS
-   ========================================================= */
-
-async function githubRequest(
-    url,
-    token,
-    options={}
-){
-
-    const response =
-        await fetch(url,{
-
-            ...options,
-
-            headers:{
-
-                "Accept":
-                    "application/vnd.github+json",
-
-                "Authorization":
-                    "Bearer " + token,
-
-                "X-GitHub-Api-Version":
-                    "2022-11-28",
-
-                ...(options.headers || {})
-            }
-        });
-
-
-    const text =
-        await response.text();
-
-
-    let result = {};
-
-    try{
-        result = JSON.parse(text);
-    }catch{}
-
-
-    if(!response.ok){
-
-        throw new Error(
-            result.message ||
-            "GitHub request failed."
-        );
-    }
-
-
-    return result;
-}
-
-
-async function getGitHubFile(
-    path,
-    token
-){
-
-    const url =
-        `https://api.github.com/repos/` +
-        `${GITHUB_OWNER}/${GITHUB_REPOSITORY}` +
-        `/contents/${path}?ref=${GITHUB_BRANCH}`;
-
-
-    try{
-
-        return await githubRequest(
-            url,
-            token
-        );
-
-    }catch(error){
-
-        if(
-            error.message
-            .toLowerCase()
-            .includes("not found")
-        ){
-
-            return null;
-        }
-
-        throw error;
-    }
-}
-
-
-async function uploadGitHubFile(
-    path,
-    content,
-    message,
-    token,
-    sha=null
-){
-
-    const url =
-        `https://api.github.com/repos/` +
-        `${GITHUB_OWNER}/${GITHUB_REPOSITORY}` +
-        `/contents/${path}`;
-
-
-    const body = {
-
-        message:message,
-
-        content:content,
-
-        branch:GITHUB_BRANCH
-    };
-
-
-    if(sha){
-        body.sha = sha;
-    }
-
-
-    return await githubRequest(
-        url,
-        token,
-        {
-            method:"PUT",
-
-            body:
-                JSON.stringify(body)
+    return new Promise(
+        resolve=>{
+            canvas.toBlob(
+                blob=>resolve(blob),
+                "image/jpeg",
+                quality
+            );
         }
     );
 }
-
-
-/* =========================================================
-   FILE → BASE64
-   ========================================================= */
-
-function blobToBase64(blob){
-
-    return new Promise((resolve,reject)=>{
-
-        const reader =
-            new FileReader();
-
-        reader.onload = ()=>{
-
-            const result =
-                reader.result;
-
-            resolve(
-                result.split(",")[1]
-            );
-        };
-
-        reader.onerror = reject;
-
-        reader.readAsDataURL(blob);
-    });
+function fileToDataURL(blob){
+    return new Promise(
+        (resolve,reject)=>{
+            const reader =
+                new FileReader();
+            reader.onload =
+                ()=>resolve(
+                    reader.result
+                );
+            reader.onerror =
+                reject;
+            reader.readAsDataURL(blob);
+        }
+    );
 }
-
-
 /* =========================================================
-   PUBLISH
-   ========================================================= */
-
-async function publishPortfolio(){
-
-    const status =
-        document.getElementById(
-            "publishStatus"
-        );
-
-
-    const token =
-        document.getElementById(
-            "githubToken"
-        ).value.trim();
-
-
-    if(!token){
-
-        status.textContent =
-            "Enter your GitHub token.";
-
-        status.classList.add("show");
-
-        return;
-    }
-
-
-    try{
-
-        status.textContent =
-            "Preparing portfolio...";
-
-        status.classList.add("show");
-
-
-        /* BASIC DATA */
-
-        portfolio.name =
-            document.getElementById(
-                "editName"
-            ).value.trim();
-
-
-        portfolio.bio =
-            document.getElementById(
-                "editBio"
-            ).value.trim();
-
-
-        portfolio.newspaper = {
-
-            title:
-                document.getElementById(
-                    "editNewsTitle"
-                ).value.trim(),
-
-            description:
-                document.getElementById(
-                    "editNewsDescription"
-                ).value.trim(),
-
-            link:
-                document.getElementById(
-                    "editNewsLink"
-                ).value.trim()
-        };
-
-
-        if(!portfolio.photos){
-            portfolio.photos=[];
-        }
-
-
-        if(!portfolio.research){
-            portfolio.research=[];
-        }
-
-
-        /* PROFILE */
-
-        const profileInput =
-            document.getElementById(
-                "profileUpload"
-            );
-
-
-        if(profileInput.files.length){
-
-            status.textContent =
-                "Compressing profile picture...";
-
-
-            const compressed =
-                await compressImage(
-                    profileInput.files[0]
-                );
-
-
-            const base64 =
-                await blobToBase64(
-                    compressed
-                );
-
-
-            const existing =
-                await getGitHubFile(
-                    "images/profile.jpg",
-                    token
-                );
-
-
-            await uploadGitHubFile(
-
-                "images/profile.jpg",
-
-                base64,
-
-                "Update profile picture",
-
-                token,
-
-                existing
-                    ? existing.sha
-                    : null
-            );
-
-
-            portfolio.profileImage =
-                "images/profile.jpg";
-        }
-
-
-        /* PHOTOS */
-
-        for(
-            let i=0;
-            i<newPhotos.length;
-            i++
-        ){
-
-            status.textContent =
-                `Uploading photo ${i+1} of ${newPhotos.length}...`;
-
-
-            const photo =
-                newPhotos[i];
-
-
-            const base64 =
-                await blobToBase64(
-                    photo.file
-                );
-
-
-            const filename =
-                "images/photo-" +
-                Date.now() +
-                "-" +
-                Math.random()
-                    .toString(36)
-                    .substring(2,8) +
-                ".jpg";
-
-
-            await uploadGitHubFile(
-
-                filename,
-
-                base64,
-
-                "Add portfolio photo",
-
-                token
-            );
-
-
-            portfolio.photos.push({
-
-                image:filename,
-
-                caption:
-                    photo.caption || ""
-            });
-        }
-
-
-        newPhotos = [];
-
-
-        /* JSON */
-
-        status.textContent =
-            "Saving portfolio data...";
-
-
-        const json =
-            JSON.stringify(
-                portfolio,
-                null,
-                2
-            );
-
-
-        const encoded =
-            btoa(
-                unescape(
-                    encodeURIComponent(json)
+   BASE64 HELPERS
+========================================================= */
+function uint8ArrayToBase64(bytes){
+    let binary = "";
+    const chunkSize = 0x8000;
+    for(
+        let i=0;
+        i<bytes.length;
+        i+=chunkSize
+    ){
+        binary += String.fromCharCode(
+            ...bytes.subarray(
+                i,
+                Math.min(
+                    i+chunkSize,
+                    bytes.length
                 )
-            );
-
-
-        const existingData =
-            await getGitHubFile(
-                DATA_FILE,
-                token
-            );
-
-
-        await uploadGitHubFile(
-
-            DATA_FILE,
-
-            encoded,
-
-            "Update portfolio data",
-
-            token,
-
-            existingData
-                ? existingData.sha
-                : null
+            )
         );
-
-
-        status.textContent =
-            "✓ Published successfully!";
-
-
-        renderPortfolio();
-
-
-        setTimeout(()=>{
-
-            closeAllOverlays();
-
-        },1800);
-
-
-    }catch(error){
-
-        console.error(error);
-
-        status.textContent =
-            "❌ " + error.message;
-
-        status.classList.add("show");
     }
+    return btoa(binary);
 }
-
-
+function utf8ToBase64(text){
+    const bytes =
+        new TextEncoder().encode(text);
+    return uint8ArrayToBase64(bytes);
+}
+function dataURLToBlob(dataURL){
+    const parts =
+        dataURL.split(",");
+    const mime =
+        parts[0]
+            .match(/:(.*?);/)[1];
+    const binary =
+        atob(parts[1]);
+    const bytes =
+        new Uint8Array(
+            binary.length
+        );
+    for(
+        let i=0;
+        i<binary.length;
+        i++
+    ){
+        bytes[i] =
+            binary.charCodeAt(i);
+    }
+    return new Blob(
+        [bytes],
+        {type:mime}
+    );
+}
 /* =========================================================
    LIGHTBOX
-   ========================================================= */
-
-function openLightbox(src){
-
+========================================================= */
+function openLightbox(url){
     document.getElementById(
         "lightboxImage"
-    ).src = src;
-
-
+    ).src = url;
     document.getElementById(
         "lightbox"
     ).classList.add("show");
 }
-
-
 function closeLightbox(){
-
     document.getElementById(
         "lightbox"
     ).classList.remove("show");
 }
-
-
 /* =========================================================
-   CLOSE
-   ========================================================= */
-
-function closeAllOverlays(){
-
-    document
-        .querySelectorAll(".overlay")
-        .forEach(element=>{
-
-            element.classList.remove("show");
-
-        });
-}
-
-
-/* =========================================================
-   SAFETY / TEXT
-   ========================================================= */
-
-function escapeText(value){
-
+   SECURITY / DISPLAY HELPERS
+========================================================= */
+function escapeHTML(value){
     return String(value ?? "")
-        .replaceAll("&","&amp;")
-        .replaceAll("<","&lt;")
-        .replaceAll(">","&gt;");
+        .replace(/&/g,"&amp;")
+        .replace(/</g,"&lt;")
+        .replace(/>/g,"&gt;")
+        .replace(/"/g,"&quot;")
+        .replace(/'/g,"&#039;");
 }
-
-
 function escapeAttribute(value){
-
-    return String(value ?? "")
-        .replaceAll("&","&amp;")
-        .replaceAll('"',"&quot;")
-        .replaceAll("'","&#039;")
-        .replaceAll("<","&lt;")
-        .replaceAll(">","&gt;");
+    return escapeHTML(value);
 }
-
-
-function safe(value){
-
-    return escapeAttribute(value);
+/* =========================================================
+   STATUS
+========================================================= */
+function showStatus(
+    id,
+    message,
+    error=false
+){
+    const element =
+        document.getElementById(id);
+    element.textContent =
+        message;
+    element.className =
+        "status show";
+    if(error){
+        element.style.background =
+            "#f3d6d3";
+        element.style.color =
+            "#7b211b";
+    }else{
+        element.style.background =
+            "#dfe7dc";
+        element.style.color =
+            "#315c38";
+    }
 }
-
+/* =========================================================
+   START
+========================================================= */
+showPage("home");
+loadPortfolio();
 </script>
-
 </body>
 </html>
