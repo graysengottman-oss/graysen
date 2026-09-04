@@ -1,0 +1,12 @@
+{
+  "name": "Graysen",
+  "bio": "Welcome to my portfolio. This is where I share my photography, political research, and newspaper work.",
+  "profileImage": "",
+  "photos": [],
+  "research": [],
+  "newspaper": {
+    "title": "Newspaper",
+    "description": "Articles, projects, and work from the newspaper.",
+    "link": ""
+  }
+}
