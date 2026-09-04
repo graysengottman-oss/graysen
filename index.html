@@ -1,0 +1,967 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>Graysen</title>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --bg:#f3eadb;
+  --card:#fffaf2;
+  --text:#111;
+  --green:#2f6b4f;
+  --green2:#234f3a;
+  --border:#d8cdbd;
+}
+body{
+  font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Arial,sans-serif;
+  background:var(--bg);
+  color:var(--text);
+  min-height:100vh;
+}
+header{
+  position:sticky;
+  top:0;
+  z-index:20;
+  background:rgba(243,234,219,.94);
+  backdrop-filter:blur(12px);
+  border-bottom:1px solid var(--border);
+}
+.nav{
+  max-width:1100px;
+  margin:auto;
+  padding:18px 20px;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:15px;
+}
+.logo{
+  font-size:28px;
+  font-weight:700;
+  letter-spacing:-1px;
+}
+nav{
+  display:flex;
+  gap:7px;
+  flex-wrap:wrap;
+  justify-content:flex-end;
+}
+nav button,
+button{
+  border:0;
+  cursor:pointer;
+  font:inherit;
+}
+nav button{
+  background:transparent;
+  padding:9px 12px;
+  border-radius:10px;
+}
+nav button:hover,
+nav button.active{
+  background:#dfd2bf;
+}
+main{
+  max-width:1100px;
+  margin:auto;
+  padding:35px 20px 70px;
+}
+.page{
+  display:none;
+  animation:fade .35s ease;
+}
+.page.active{
+  display:block;
+}
+@keyframes fade{
+  from{opacity:0;transform:translateY(8px)}
+  to{opacity:1;transform:translateY(0)}
+}
+.hero{
+  display:grid;
+  grid-template-columns:260px 1fr;
+  gap:45px;
+  align-items:center;
+  min-height:65vh;
+}
+.profile{
+  width:260px;
+  height:260px;
+  border-radius:50%;
+  object-fit:cover;
+  background:#ded3c3;
+  border:5px solid var(--card);
+  box-shadow:0 10px 35px rgba(0,0,0,.12);
+}
+.placeholder{
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  font-size:70px;
+  font-weight:700;
+  color:var(--green);
+}
+h1{
+  font-size:clamp(48px,8vw,86px);
+  line-height:.95;
+  letter-spacing:-4px;
+  margin-bottom:20px;
+}
+h2{
+  font-size:40px;
+  margin-bottom:12px;
+  letter-spacing:-1.5px;
+}
+h3{
+  margin-bottom:8px;
+}
+p{
+  line-height:1.7;
+}
+.bio{
+  max-width:650px;
+  font-size:19px;
+  color:#403b35;
+  margin-bottom:25px;
+}
+.green{
+  color:var(--green);
+}
+.btn{
+  background:var(--green);
+  color:white;
+  padding:12px 18px;
+  border-radius:12px;
+  font-weight:600;
+}
+.btn:hover{
+  background:var(--green2);
+}
+.section-title{
+  margin-bottom:28px;
+}
+.gallery{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:18px;
+}
+.photo-card{
+  background:var(--card);
+  border:1px solid var(--border);
+  border-radius:18px;
+  overflow:hidden;
+  box-shadow:0 5px 20px rgba(0,0,0,.05);
+}
+.photo-card img{
+  width:100%;
+  aspect-ratio:1/1;
+  object-fit:cover;
+  display:block;
+  cursor:pointer;
+}
+.caption{
+  padding:13px 15px 16px;
+}
+.cards{
+  display:grid;
+  grid-template-columns:repeat(2,1fr);
+  gap:18px;
+}
+.card{
+  background:var(--card);
+  border:1px solid var(--border);
+  border-radius:18px;
+  padding:22px;
+}
+.card p{
+  margin:8px 0 16px;
+  color:#4a443d;
+}
+.card a{
+  color:var(--green);
+  font-weight:600;
+  text-decoration:none;
+}
+.empty{
+  padding:40px;
+  border:1px dashed var(--border);
+  border-radius:18px;
+  text-align:center;
+  color:#6c6257;
+}
+.overlay{
+  position:fixed;
+  inset:0;
+  background:rgba(0,0,0,.8);
+  z-index:100;
+  display:none;
+  align-items:center;
+  justify-content:center;
+  padding:20px;
+}
+.overlay.show{
+  display:flex;
+}
+.overlay img{
+  max-width:95vw;
+  max-height:90vh;
+  border-radius:15px;
+}
+.modal{
+  width:min(700px,100%);
+  max-height:90vh;
+  overflow:auto;
+  background:var(--card);
+  border-radius:20px;
+  padding:25px;
+}
+.modal h2{
+  font-size:30px;
+}
+input,textarea{
+  width:100%;
+  padding:12px;
+  margin:7px 0 15px;
+  border:1px solid var(--border);
+  border-radius:10px;
+  background:white;
+  color:#111;
+  font:inherit;
+}
+textarea{
+  min-height:110px;
+  resize:vertical;
+}
+label{
+  font-weight:600;
+  display:block;
+}
+.form-section{
+  border-top:1px solid var(--border);
+  padding-top:20px;
+  margin-top:20px;
+}
+.photo-editor{
+  display:flex;
+  gap:10px;
+  align-items:center;
+  margin-bottom:12px;
+  padding:10px;
+  border:1px solid var(--border);
+  border-radius:12px;
+}
+.photo-editor img{
+  width:65px;
+  height:65px;
+  object-fit:cover;
+  border-radius:8px;
+}
+.photo-editor input{
+  margin:0;
+}
+.danger{
+  background:#8b3030;
+  color:white;
+  padding:9px 12px;
+  border-radius:9px;
+}
+.small{
+  font-size:13px;
+  color:#655e55;
+}
+.status{
+  margin-top:15px;
+  padding:12px;
+  border-radius:10px;
+  background:#e6dccd;
+  display:none;
+}
+.status.show{
+  display:block;
+}
+footer{
+  text-align:center;
+  padding:30px;
+  color:#6c6257;
+}
+@media(max-width:750px){
+  .nav{
+    align-items:flex-start;
+    flex-direction:column;
+  }
+  nav{
+    width:100%;
+    justify-content:flex-start;
+  }
+  .hero{
+    grid-template-columns:1fr;
+    text-align:center;
+    justify-items:center;
+    min-height:auto;
+    padding:30px 0;
+  }
+  .bio{
+    font-size:17px;
+  }
+  h1{
+    font-size:58px;
+  }
+  .gallery{
+    grid-template-columns:repeat(2,1fr);
+  }
+  .cards{
+    grid-template-columns:1fr;
+  }
+  .profile{
+    width:210px;
+    height:210px;
+  }
+}
+@media(max-width:450px){
+  .gallery{
+    grid-template-columns:1fr;
+  }
+}
+</style>
+</head>
+<body>
+<header>
+  <div class="nav">
+    <div class="logo">Graysen</div>
+    <nav>
+      <button class="active" onclick="showPage('home',this)">Home</button>
+      <button onclick="showPage('photography',this)">Photography</button>
+      <button onclick="showPage('research',this)">Political Research</button>
+      <button onclick="showPage('newspaper',this)">Newspaper</button>
+      <button onclick="openLogin()">Edit Portfolio</button>
+    </nav>
+  </div>
+</header>
+<main>
+<section id="home" class="page active">
+  <div class="hero">
+    <div id="profileContainer"></div>
+    <div>
+      <div class="green">PORTFOLIO</div>
+      <h1 id="homeName">Graysen</h1>
+      <p id="homeBio" class="bio"></p>
+      <button class="btn" onclick="showPage('photography')">
+        Explore my work
+      </button>
+    </div>
+  </div>
+</section>
+<section id="photography" class="page">
+  <div class="section-title">
+    <div class="green">MY WORK</div>
+    <h2>Photography</h2>
+    <p>Photography, moments, and places I've captured.</p>
+  </div>
+  <div id="gallery" class="gallery"></div>
+</section>
+<section id="research" class="page">
+  <div class="section-title">
+    <div class="green">MY RESEARCH</div>
+    <h2>Political Research</h2>
+    <p>Research, ideas, and political projects.</p>
+  </div>
+  <div id="researchCards" class="cards"></div>
+</section>
+<section id="newspaper" class="page">
+  <div class="section-title">
+    <div class="green">JOURNALISM</div>
+    <h2 id="newspaperTitle">Newspaper</h2>
+    <p id="newspaperDescription"></p>
+  </div>
+  <div id="newspaperLink"></div>
+</section>
+</main>
+<footer>
+  © <span id="year"></span> Graysen
+</footer>
+<!-- LOGIN -->
+<div class="overlay" id="loginOverlay">
+  <div class="modal">
+    <h2>Edit Portfolio</h2>
+    <p>Enter your editor code.</p>
+    <input id="codeInput" type="password" placeholder="Editor code">
+    <button class="btn" onclick="checkCode()">Continue</button>
+    <button onclick="closeOverlays()" style="margin-left:8px;background:none">
+      Cancel
+    </button>
+    <p id="loginError" style="color:#9b3030;margin-top:10px"></p>
+  </div>
+</div>
+<!-- EDITOR -->
+<div class="overlay" id="editorOverlay">
+  <div class="modal">
+    <h2>Edit Portfolio</h2>
+    <label>Name</label>
+    <input id="editName">
+    <label>Bio</label>
+    <textarea id="editBio"></textarea>
+    <div class="form-section">
+      <h3>Profile Picture</h3>
+      <input id="profileFile" type="file" accept="image/*">
+      <p class="small">
+        Your image will automatically be compressed before uploading.
+      </p>
+    </div>
+    <div class="form-section">
+      <h3>Photography</h3>
+      <input id="photoFiles" type="file" accept="image/*" multiple>
+      <p class="small">
+        Maximum 25 photos. Images are automatically compressed.
+      </p>
+      <div id="photoEditors"></div>
+    </div>
+    <div class="form-section">
+      <h3>Political Research</h3>
+      <div id="researchEditors"></div>
+      <button class="btn" onclick="addResearch()">
+        + Add Research
+      </button>
+    </div>
+    <div class="form-section">
+      <h3>Newspaper</h3>
+      <label>Title</label>
+      <input id="newsTitle">
+      <label>Description</label>
+      <textarea id="newsDescription"></textarea>
+      <label>Link</label>
+      <input id="newsLink" placeholder="https://...">
+    </div>
+    <div class="form-section">
+      <h3>GitHub Publishing</h3>
+      <p class="small">
+        Enter your GitHub fine-grained token when you publish.
+        It is only kept in memory while this page is open and is never
+        saved into your website.
+      </p>
+      <input id="githubToken" type="password"
+             placeholder="GitHub token">
+      <button class="btn" onclick="publishToGitHub()">
+        Save & Publish
+      </button>
+      <button onclick="closeOverlays()"
+              style="margin-left:8px;background:none">
+        Cancel
+      </button>
+      <div id="status" class="status"></div>
+    </div>
+  </div>
+</div>
+<!-- IMAGE VIEWER -->
+<div class="overlay" id="imageOverlay" onclick="closeImage()">
+  <img id="largeImage">
+</div>
+<script>
+const GITHUB_OWNER = "graysengottman-oss";
+const GITHUB_REPO = "graysen";
+const GITHUB_BRANCH = "main";
+const EDITOR_CODE = "4547";
+let data = {
+  name:"Graysen",
+  bio:"Welcome to my portfolio. This is where I share my photography, political research, and newspaper work.",
+  profileImage:"",
+  photos:[],
+  research:[],
+  newspaper:{
+    title:"Newspaper",
+    description:"Articles, projects, and work from the newspaper.",
+    link:""
+  }
+};
+let pendingPhotos = [];
+document.getElementById("year").textContent = new Date().getFullYear();
+async function loadData(){
+  try{
+    const response = await fetch(
+      "portfolio-data.json?v=" + Date.now()
+    );
+    if(response.ok){
+      data = await response.json();
+    }
+  }catch(e){
+    console.log("Using default portfolio data.");
+  }
+  render();
+}
+function render(){
+  document.getElementById("homeName").textContent =
+    data.name || "Graysen";
+  document.getElementById("homeBio").textContent =
+    data.bio || "";
+  const profile = document.getElementById("profileContainer");
+  if(data.profileImage){
+    profile.innerHTML =
+      `<img class="profile" src="${escapeHTML(data.profileImage)}">`;
+  }else{
+    profile.innerHTML =
+      `<div class="profile placeholder">G</div>`;
+  }
+  renderPhotos();
+  renderResearch();
+  document.getElementById("newspaperTitle").textContent =
+    data.newspaper?.title || "Newspaper";
+  document.getElementById("newspaperDescription").textContent =
+    data.newspaper?.description || "";
+  const newsLink = document.getElementById("newspaperLink");
+  if(data.newspaper?.link){
+    newsLink.innerHTML =
+      `<a class="btn"
+          href="${escapeHTML(data.newspaper.link)}"
+          target="_blank"
+          rel="noopener">
+          Read Newspaper
+       </a>`;
+  }else{
+    newsLink.innerHTML =
+      `<div class="empty">No newspaper link added yet.</div>`;
+  }
+}
+function renderPhotos(){
+  const gallery = document.getElementById("gallery");
+  if(!data.photos || data.photos.length === 0){
+    gallery.innerHTML =
+      `<div class="empty">No photography added yet.</div>`;
+    return;
+  }
+  gallery.innerHTML = data.photos.map((photo,index)=>`
+    <div class="photo-card">
+      <img
+        src="${escapeHTML(photo.image)}"
+        alt="Photography ${index+1}"
+        onclick="openImage('${escapeHTML(photo.image)}')"
+      >
+      ${
+        photo.caption
+        ? `<div class="caption">${escapeHTML(photo.caption)}</div>`
+        : ""
+      }
+    </div>
+  `).join("");
+}
+function renderResearch(){
+  const container =
+    document.getElementById("researchCards");
+  if(!data.research || data.research.length === 0){
+    container.innerHTML =
+      `<div class="empty">No political research added yet.</div>`;
+    return;
+  }
+  container.innerHTML = data.research.map(item=>`
+    <div class="card">
+      <h3>${escapeHTML(item.title || "Untitled")}</h3>
+      <p>${escapeHTML(item.description || "")}</p>
+      ${
+        item.link
+        ? `<a href="${escapeHTML(item.link)}"
+             target="_blank"
+             rel="noopener">
+             View Research →
+           </a>`
+        : ""
+      }
+    </div>
+  `).join("");
+}
+function showPage(id,button){
+  document.querySelectorAll(".page")
+    .forEach(p=>p.classList.remove("active"));
+  document.getElementById(id)
+    .classList.add("active");
+  document.querySelectorAll("nav button")
+    .forEach(b=>b.classList.remove("active"));
+  if(button) button.classList.add("active");
+  window.scrollTo({top:0,behavior:"smooth"});
+}
+function openLogin(){
+  document.getElementById("loginOverlay")
+    .classList.add("show");
+  document.getElementById("codeInput").value="";
+  document.getElementById("loginError").textContent="";
+}
+function checkCode(){
+  const code =
+    document.getElementById("codeInput").value;
+  if(code !== EDITOR_CODE){
+    document.getElementById("loginError").textContent =
+      "Incorrect code.";
+    return;
+  }
+  closeLogin();
+  openEditor();
+}
+function closeLogin(){
+  document.getElementById("loginOverlay")
+    .classList.remove("show");
+}
+function openEditor(){
+  document.getElementById("editorOverlay")
+    .classList.add("show");
+  document.getElementById("editName").value =
+    data.name || "";
+  document.getElementById("editBio").value =
+    data.bio || "";
+  document.getElementById("newsTitle").value =
+    data.newspaper?.title || "";
+  document.getElementById("newsDescription").value =
+    data.newspaper?.description || "";
+  document.getElementById("newsLink").value =
+    data.newspaper?.link || "";
+  document.getElementById("profileFile").value="";
+  document.getElementById("photoFiles").value="";
+  document.getElementById("githubToken").value="";
+  pendingPhotos = [];
+  renderPhotoEditors();
+  renderResearchEditors();
+}
+function closeOverlays(){
+  document.querySelectorAll(".overlay")
+    .forEach(x=>x.classList.remove("show"));
+}
+function renderPhotoEditors(){
+  const container =
+    document.getElementById("photoEditors");
+  container.innerHTML =
+    (data.photos || []).map((photo,index)=>`
+      <div class="photo-editor">
+        <img src="${escapeHTML(photo.image)}">
+        <input
+          placeholder="Caption"
+          value="${escapeHTML(photo.caption || "")}"
+          oninput="data.photos[${index}].caption=this.value"
+        >
+        <button class="danger"
+          onclick="removePhoto(${index})">
+          Delete
+        </button>
+      </div>
+    `).join("");
+}
+function removePhoto(index){
+  data.photos.splice(index,1);
+  renderPhotoEditors();
+}
+function renderResearchEditors(){
+  const container =
+    document.getElementById("researchEditors");
+  container.innerHTML =
+    (data.research || []).map((item,index)=>`
+      <div class="card" style="margin-bottom:12px">
+        <label>Title</label>
+        <input
+          value="${escapeHTML(item.title || "")}"
+          oninput="data.research[${index}].title=this.value"
+        >
+        <label>Description</label>
+        <textarea
+          oninput="data.research[${index}].description=this.value"
+        >${escapeHTML(item.description || "")}</textarea>
+        <label>Link</label>
+        <input
+          value="${escapeHTML(item.link || "")}"
+          placeholder="https://..."
+          oninput="data.research[${index}].link=this.value"
+        >
+        <button class="danger"
+          onclick="data.research.splice(${index},1);renderResearchEditors()">
+          Delete Research
+        </button>
+      </div>
+    `).join("");
+}
+function addResearch(){
+  data.research.push({
+    title:"",
+    description:"",
+    link:""
+  });
+  renderResearchEditors();
+}
+document.getElementById("photoFiles")
+.addEventListener("change",async function(){
+  const files = Array.from(this.files);
+  if(
+    data.photos.length + pendingPhotos.length + files.length > 25
+  ){
+    alert("You can have a maximum of 25 photos.");
+    this.value="";
+    return;
+  }
+  for(const file of files){
+    try{
+      const compressed =
+        await compressImage(file);
+      pendingPhotos.push({
+        file:compressed,
+        caption:""
+      });
+    }catch(e){
+      alert("One of the photos could not be compressed.");
+    }
+  }
+  renderPendingPhotos();
+});
+function renderPendingPhotos(){
+  const container =
+    document.getElementById("photoEditors");
+  const existing =
+    (data.photos || []).map((photo,index)=>`
+      <div class="photo-editor">
+        <img src="${escapeHTML(photo.image)}">
+        <input
+          placeholder="Caption"
+          value="${escapeHTML(photo.caption || "")}"
+          oninput="data.photos[${index}].caption=this.value"
+        >
+        <button class="danger"
+          onclick="removePhoto(${index})">
+          Delete
+        </button>
+      </div>
+    `).join("");
+  const pending =
+    pendingPhotos.map((photo,index)=>`
+      <div class="photo-editor">
+        <img src="${URL.createObjectURL(photo.file)}">
+        <input
+          placeholder="New photo caption"
+          oninput="pendingPhotos[${index}].caption=this.value"
+        >
+        <button class="danger"
+          onclick="pendingPhotos.splice(${index},1);renderPendingPhotos()">
+          Delete
+        </button>
+      </div>
+    `).join("");
+  container.innerHTML = existing + pending;
+}
+async function compressImage(file){
+  const bitmap =
+    await createImageBitmap(file);
+  const maxWidth = 1200;
+  let width = bitmap.width;
+  let height = bitmap.height;
+  if(width > maxWidth){
+    height =
+      Math.round(height * maxWidth / width);
+    width = maxWidth;
+  }
+  const canvas =
+    document.createElement("canvas");
+  canvas.width=width;
+  canvas.height=height;
+  const ctx=canvas.getContext("2d");
+  ctx.drawImage(bitmap,0,0,width,height);
+  let quality=.75;
+  let blob =
+    await new Promise(resolve =>
+      canvas.toBlob(resolve,"image/jpeg",quality)
+    );
+  while(blob.size > 800000 && quality > .35){
+    quality -= .08;
+    blob =
+      await new Promise(resolve =>
+        canvas.toBlob(resolve,"image/jpeg",quality)
+      );
+  }
+  if(blob.size > 900000){
+    throw new Error("Image too large");
+  }
+  return blob;
+}
+async function fileToBase64(blob){
+  return new Promise((resolve,reject)=>{
+    const reader=new FileReader();
+    reader.onload=()=>{
+      resolve(reader.result.split(",")[1]);
+    };
+    reader.onerror=reject;
+    reader.readAsDataURL(blob);
+  });
+}
+async function githubRequest(url,token,options={}){
+  const response =
+    await fetch(url,{
+      ...options,
+      headers:{
+        "Accept":"application/vnd.github+json",
+        "Authorization":"Bearer "+token,
+        "X-GitHub-Api-Version":"2022-11-28",
+        ...(options.headers || {})
+      }
+    });
+  const text = await response.text();
+  let json={};
+  try{
+    json=JSON.parse(text);
+  }catch{}
+  if(!response.ok){
+    throw new Error(
+      json.message ||
+      "GitHub request failed ("+response.status+")"
+    );
+  }
+  return json;
+}
+async function getFile(path,token){
+  const url =
+    `https://api.github.com/repos/${GITHUB_OWNER}/${GITHUB_REPO}/contents/${path}?ref=${GITHUB_BRANCH}`;
+  try{
+    return await githubRequest(url,token);
+  }catch(error){
+    if(error.message.includes("Not Found")){
+      return null;
+    }
+    throw error;
+  }
+}
+async function putFile(path,base64,message,token,sha=null){
+  const url =
+    `https://api.github.com/repos/${GITHUB_OWNER}/${GITHUB_REPO}/contents/${path}`;
+  const body={
+    message,
+    content:base64,
+    branch:GITHUB_BRANCH
+  };
+  if(sha) body.sha=sha;
+  return await githubRequest(
+    url,
+    token,
+    {
+      method:"PUT",
+      body:JSON.stringify(body)
+    }
+  );
+}
+async function publishToGitHub(){
+  const status =
+    document.getElementById("status");
+  const token =
+    document.getElementById("githubToken").value.trim();
+  if(!token){
+    status.textContent =
+      "Enter your GitHub token first.";
+    status.classList.add("show");
+    return;
+  }
+  try{
+    status.textContent =
+      "Preparing your portfolio...";
+    status.classList.add("show");
+    data.name =
+      document.getElementById("editName").value.trim();
+    data.bio =
+      document.getElementById("editBio").value.trim();
+    data.newspaper={
+      title:
+        document.getElementById("newsTitle").value.trim(),
+      description:
+        document.getElementById("newsDescription").value.trim(),
+      link:
+        document.getElementById("newsLink").value.trim()
+    };
+    if(!data.photos) data.photos=[];
+    if(!data.research) data.research=[];
+    /* PROFILE IMAGE */
+    const profileFile =
+      document.getElementById("profileFile").files[0];
+    if(profileFile){
+      status.textContent =
+        "Compressing profile picture...";
+      const compressed =
+        await compressImage(profileFile);
+      const base64 =
+        await fileToBase64(compressed);
+      const existing =
+        await getFile("images/profile.jpg",token);
+      await putFile(
+        "images/profile.jpg",
+        base64,
+        "Update profile picture",
+        token,
+        existing?.sha || null
+      );
+      data.profileImage="images/profile.jpg";
+    }
+    /* NEW PHOTOS */
+    for(let i=0;i<pendingPhotos.length;i++){
+      status.textContent =
+        `Uploading photo ${i+1} of ${pendingPhotos.length}...`;
+      const photo =
+        pendingPhotos[i];
+      const base64 =
+        await fileToBase64(photo.file);
+      const filename =
+        "images/photo-" +
+        Date.now() +
+        "-" +
+        Math.random().toString(36).slice(2,8) +
+        ".jpg";
+      await putFile(
+        filename,
+        base64,
+        "Add portfolio photo",
+        token
+      );
+      data.photos.push({
+        image:filename,
+        caption:photo.caption || ""
+      );
+    }
+    pendingPhotos=[];
+    /* SAVE JSON */
+    status.textContent =
+      "Publishing portfolio...";
+    const json =
+      JSON.stringify(data,null,2);
+    const encoded =
+      btoa(unescape(encodeURIComponent(json)));
+    const existingData =
+      await getFile("portfolio-data.json",token);
+    await putFile(
+      "portfolio-data.json",
+      encoded,
+      "Update portfolio",
+      token,
+      existingData?.sha || null
+    );
+    status.textContent =
+      "✓ Published! GitHub Pages will update shortly.";
+    renderPhotoEditors();
+    setTimeout(()=>{
+      closeOverlays();
+      render();
+    },1800);
+  }catch(error){
+    console.error(error);
+    status.textContent =
+      "❌ " + error.message;
+    status.classList.add("show");
+  }
+}
+function openImage(src){
+  document.getElementById("largeImage").src=src;
+  document.getElementById("imageOverlay")
+    .classList.add("show");
+}
+function closeImage(){
+  document.getElementById("imageOverlay")
+    .classList.remove("show");
+}
+function escapeHTML(value){
+  return String(value ?? "")
+    .replaceAll("&","&amp;")
+    .replaceAll("<","&lt;")
+    .replaceAll(">","&gt;")
+    .replaceAll('"',"&quot;")
+    .replaceAll("'","&#039;");
+}
+loadData();
+</script>
+</body>
+</html>
